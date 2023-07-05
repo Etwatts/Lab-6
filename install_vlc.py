@@ -41,9 +41,7 @@ def get_expected_sha256():
         file_content = resp_msg.text
 
         expected_sha256 = file_content.split(' ')
-    # Hint: See example code in lab instructions entitled "Extracting Text from a Response Message Body"
-
-    # Hint: Use str class methods, str slicing, and/or regex to extract the expected SHA-256 value from the text 
+        
     return expected_sha256
 
 def download_installer():
