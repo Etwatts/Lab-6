@@ -31,7 +31,7 @@ def get_expected_sha256():
         str: Expected SHA-256 hash value of VLC installer
     """
 
-    # Send GET request to download and save a small text file to disk
+    # Send GET request to download of sha256
     file_url = 'https://download.videolan.org/pub/videolan/vlc/3.0.17.4/win64/vlc-3.0.17.4-win64.exe.sha256'
     resp_msg = requests.get(file_url)
     
@@ -54,15 +54,15 @@ def download_installer():
     """
     # Step 2
 
-    #Send GET message to download the file 
+    #Send GET message to download the exe file 
     file_url = 'https://download.videolan.org/pub/videolan/vlc/3.0.17.4/win64/vlc-3.0.17.4-win64.exe'
     resp_msg = requests.get(file_url)
     installer_data = resp_msg.content
+    # Checks response code to make sure is okay 
     if resp_msg.status_code == requests.codes.ok:
         return installer_data
     else:
-        return
-    # Hint: See example code in lab instructions entitled "Downloading a Binary File"
+        return None
     
 
 def installer_ok(installer_data, expected_sha256):
@@ -95,14 +95,12 @@ def save_installer(installer_data):
         str: Full path of the saved VLC installer file
     """
     # Step 4
+    # Gives absolute path for the installer
     install_path = r'C:\temp\VLCMedia.exe'
-
+    # Saves the file to the absolute path 
     with open(install_path, 'wb') as  file:
             file.write(installer_data)
 
-
-
-    # Hint: See example code in lab instructions entitled "Downloading a Binary File"
     return install_path
 
 def run_installer(installer_path):
